@@ -8,12 +8,14 @@ const main = async() => {
     let optSelected;
 
     do {
+
         try {
             optSelected = await showMenu();
         } catch (error) {
             console.log(error);
         }
-        await pause();
+        if(optSelected !== 0) await pause();
+
     } while (optSelected != 0);
 
    
