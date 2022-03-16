@@ -1,0 +1,22 @@
+{
+  "name": "agile-terminal",
+  "version": "1.0.0",
+  "description": "Agile terminal to do task.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albertost5/agile-terminal-js.git"
+  },
+  "author": "Alberto Sánchez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/albertost5/agile-terminal-js/issues"
+  },
+  "homepage": "https://github.com/albertost5/agile-terminal-js#readme",
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
+}
