@@ -17,7 +17,7 @@ const main = async() => {
                     taskList.createTask( taskDesc );
                     break;
                 case 2:
-                    console.log( taskList.list );
+                    console.log( new Intl.ListFormat( 'en', { type: 'conjunction' }).format( taskList.getListFormatted ));
                     break;
                 case 3:
                 

@@ -3,12 +3,19 @@ const Task = require('./task');
 class TaskList {
     _list = {};
 
-    get list() {
+    get getListFormatted() {
         let message;
+
+        if( Object.keys(this._list).length === 0 ) {
+            message = 'There are not tasks to list yet'.red
+        }else {
         
-        Object.keys(this._list).length === 0 ?
-            message = 'There are not tasks to list yet'.red :  
-            message = this._list;
+            message = [];
+			
+            Object.values(this._list).forEach(t => {
+                message.push( t.description.create_task );
+            });
+        }
 
         return message;
     }
