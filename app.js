@@ -1,18 +1,44 @@
 require('colors');
-const { showMenu, pause } = require('./helpers/inquirer');
+const { showMenu, pause, getTaskDescription } = require('./helpers/inquirer');
+const TaskList = require('./models/taskList');
 
 const main = async() => {
     
     let optSelected;
-
+    const taskList = new TaskList();
     do {
 
         try {
             optSelected = await showMenu();
+            
+            switch (optSelected) {
+                case 1:
+                    const taskDesc = await getTaskDescription();
+                    taskList.createTask( taskDesc );
+                    break;
+                case 2:
+                    console.log( taskList.list );
+                    break;
+                case 3:
+                
+                    break;
+                case 4:
+
+                    break;
+                case 5:
+                
+                    break;
+                case 6:
+
+                    break;
+
+                default:
+                    break;
+            }
         } catch (error) {
             console.log(error);
         }
-        
+
         if(optSelected !== 0) await pause();
 
     } while (optSelected != 0);

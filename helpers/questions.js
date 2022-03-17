@@ -8,32 +8,32 @@ const menuQuestion = [
         message: 'Select one option: ',
         choices: [
             {
-                value: 0,
-                name: `0. ${ menuOptions[0] }`
-            },
-            {
                 value: 1,
-                name: `1. ${ menuOptions[1] }`
+                name: `${ '1.'.green} ${ menuOptions[1] }`
             },
             {
                 value: 2,
-                name: `2. ${ menuOptions[2] }`
+                name: `${ '2.'.green} ${ menuOptions[2] }`
             },
             {
                 value: 3,
-                name: `3. ${ menuOptions[3] }`
+                name: `${ '3.'.green} ${ menuOptions[3] }`
             },
             {
                 value: 4,
-                name: `4. ${ menuOptions[4] }`
+                name: `${ '4.'.green} ${ menuOptions[4] }`
             },
             {
                 value: 5,
-                name: `5. ${ menuOptions[5] }`
+                name: `${ '5.'.green} ${ menuOptions[5] }`
             },
             {
                 value: 6,
-                name: `6. ${ menuOptions[6] }`
+                name: `${ '6.'.green} ${ menuOptions[6] }`
+            },
+            {
+                value: 0,
+                name: `${ '0.'.green } ${ menuOptions[0] }`
             }
         ]
     }
@@ -47,9 +47,24 @@ const pauseQuestion = [
     }
 ];
 
+const createTaskQuestion = [
+    {
+        type: 'input',
+        name: 'create_task',
+        message: 'Insert task description: ',
+        validate( val ) {
+            if( val.length === 0 ) {
+                return 'The description cant be empty.'.red;
+            }
+            return true;
+        }
+    }
+]
+
 
 
 module.exports = {
     menuQuestion,
-    pauseQuestion
+    pauseQuestion,
+    createTaskQuestion
 };

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/albertost5/agile-terminal-js#readme",
   "dependencies": {
     "colors": "^1.4.0",
-    "inquirer": "^8.2.1"
+    "inquirer": "^8.2.1",
+    "uuid": "^8.3.2"
   }
 }
