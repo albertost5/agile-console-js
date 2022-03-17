@@ -1,4 +1,4 @@
-// const colors = require('colors');
+// require('colors');
 // const menuOptionsArr = require('./menuOptions');
 // const readline = require('readline');
 
