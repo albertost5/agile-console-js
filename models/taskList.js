@@ -1,3 +1,4 @@
+const { saveInfo } = require('../helpers/save');
 const Task = require('./task');
 
 class TaskList {
@@ -13,7 +14,7 @@ class TaskList {
             message = [];
 			
             Object.values(this._list).forEach(t => {
-                message.push( t.description.create_task );
+                message.push( t.description );
             });
         }
 
@@ -26,6 +27,7 @@ class TaskList {
 
     createTask( desc ) {
         const task = new Task( desc );
+        console.log("createtask =>", task);
         this._list[task.id] = task;
     }
 }

@@ -20,9 +20,8 @@ const pause = async() => {
 }
 
 const getTaskDescription = async() => {
-    const taskDescription = await inquirer.prompt( createTaskQuestion );
-
-    return taskDescription;
+    const task = await inquirer.prompt( createTaskQuestion );
+    return task._description;
 }
 
 module.exports = {

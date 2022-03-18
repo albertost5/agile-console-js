@@ -39,9 +39,9 @@ const main = async() => {
             console.log(error);
         }
 
-        if(optSelected !== 0) await pause();
+        if(optSelected !== 7) await pause();
 
-    } while (optSelected != 0);
+    } while (optSelected != 7);
 
 };
 
