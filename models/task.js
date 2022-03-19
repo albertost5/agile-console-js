@@ -9,7 +9,6 @@ class Task {
         this.id = uuidv4();
         this.description = description;
     }
-
 }
 
 module.exports = Task;

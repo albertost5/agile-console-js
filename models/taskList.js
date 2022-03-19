@@ -1,20 +1,20 @@
-const { saveInfo } = require('../helpers/save');
 const Task = require('./task');
 
 class TaskList {
-    _list = {};
+    #list = {};
 
-    get getListFormatted() {
+    get getListArr() {
         let message;
 
-        if( Object.keys(this._list).length === 0 ) {
+        if( Object.keys(this.#list).length === 0 ) {
             message = 'There are not tasks to list yet'.red
         }else {
         
             message = [];
 			
-            Object.values(this._list).forEach(t => {
-                message.push( t.description );
+            Object.keys(this.#list).forEach( key => {
+                const task = this.#list[key];
+                message.push( task );
             });
         }
 
@@ -22,13 +22,18 @@ class TaskList {
     }
 
     constructor() {
-        this._list = {};
+        this.#list = {};
     }
 
-    createTask( desc ) {
+    createTask( desc = '' ) {
         const task = new Task( desc );
-        console.log("createtask =>", task);
-        this._list[task.id] = task;
+        this.#list[task.id] = task;
+    }
+
+    loadTasks( objectsArr = [] ) {
+        objectsArr.forEach(element => {
+            this.#list[element.id] = element;
+        });
     }
 }
 
