@@ -5,9 +5,18 @@ class Task {
     description = '';
     doneDate = null;
 
-    constructor( description ) {
-        this.id = uuidv4();
-        this.description = description;
+    constructor(id, desc, date) {
+        this.id = id ?? uuidv4();
+        this.description = desc ?? this.description;
+        this.doneDate = date ?? this.doneDate;
+    }
+    
+    /**
+     * Return the task's description.
+     * @return  {string}
+     */
+    toString() {
+        return this.description;
     }
 }
 

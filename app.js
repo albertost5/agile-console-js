@@ -24,7 +24,7 @@ const main = async() => {
                    taskList.createTask( taskDesc );
                     break;
                 case 2:
-                    console.log( taskList.getListArr );
+                    console.log( taskList.getTaskListFormatted() );
                     // console.log( new Intl.ListFormat( 'en', { type: 'conjunction' }).format( taskList.getListArr ));
                     break;
                 case 3:

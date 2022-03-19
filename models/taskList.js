@@ -4,19 +4,12 @@ class TaskList {
     #list = {};
 
     get getListArr() {
-        let message;
-
-        if( Object.keys(this.#list).length === 0 ) {
-            message = 'There are not tasks to list yet'.red
-        }else {
-        
-            message = [];
+        let message = [];
 			
-            Object.keys(this.#list).forEach( key => {
-                const task = this.#list[key];
-                message.push( task );
-            });
-        }
+        Object.keys(this.#list).forEach( key => {
+            const task = this.#list[key];
+            message.push( task );
+        });
 
         return message;
     }
@@ -32,8 +25,22 @@ class TaskList {
 
     loadTasks( objectsArr = [] ) {
         objectsArr.forEach(element => {
-            this.#list[element.id] = element;
+            const task = new Task(element.id, element.description, element.doneDate)
+            this.#list[task.id] = task;
         });
+    }
+
+    /**
+     * Return the #list formatted
+     * @return  {string}
+     */
+    getTaskListFormatted() {
+        let taskList = '';
+        this.getListArr.forEach( ( task, index ) => {
+            taskList += `${ index + 1 }. `.cyan + `${task} \n`
+        })
+
+        return taskList;
     }
 }
 
