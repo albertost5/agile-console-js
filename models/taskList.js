@@ -1,3 +1,4 @@
+require('colors');
 const Task = require('./task');
 
 class TaskList {
@@ -37,9 +38,26 @@ class TaskList {
     getTaskListFormatted() {
         let taskList = '';
         this.getListArr.forEach( ( task, index ) => {
-            taskList += `${ index + 1 }. `.cyan + `${task} \n`
+            const status = task.doneDate ? `:: Completed`.green : `:: Pending`.yellow;
+            taskList += `${ index + 1 }. `.cyan + `${ task } ${ status } \n`
         })
 
+        return taskList;
+    }
+/**
+     * Return the #list formatted with the un/completed tasks.
+     * @return  {string}
+     */
+    getTaskListCompletedOrPending( flag = false) {
+        let taskList = '';
+        let taskListFlag = flag 
+                            ? this.getListArr.filter( task => task.doneDate != null )
+                            : this.getListArr.filter( task => task.doneDate == null );
+        
+        taskListFlag.forEach( (task, index) => {
+            const status = flag ? `:: ${ task.doneDate }`.green : `:: Pending`.yellow;
+            taskList += `${ index + 1 }. `.cyan + `${ task } ${ status } \n`
+        })
         return taskList;
     }
 }

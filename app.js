@@ -8,10 +8,10 @@ const main = async() => {
     let optSelected;
     const taskList = new TaskList();
     const tasksListToImport = readTasks();
-   
-    // If there is data in the DB, we create the tasklist
+
+    // Fill the tasklist.#list with the data from the file
     if( tasksListToImport ) {
-        taskList.loadTasks( tasksListToImport ); 
+        taskList.loadTasks(tasksListToImport); 
     }
 
     do {
@@ -21,17 +21,19 @@ const main = async() => {
             switch (optSelected) {
                 case 1:
                     const taskDesc = await getTaskDescription();
-                   taskList.createTask( taskDesc );
+                   taskList.createTask(taskDesc);
                     break;
                 case 2:
                     console.log( taskList.getTaskListFormatted() );
                     // console.log( new Intl.ListFormat( 'en', { type: 'conjunction' }).format( taskList.getListArr ));
                     break;
                 case 3:
-                
+                    // completedTask
+                    console.log( taskList.getTaskListCompletedOrPending(true) );
                     break;
                 case 4:
-
+                    // pendingTask
+                    console.log( taskList.getTaskListCompletedOrPending(false) );
                     break;
                 case 5:
                 
@@ -44,8 +46,8 @@ const main = async() => {
             console.log('ERR: ', error);
             return;
         }
-
-        saveTasks( taskList.getListArr );
+        
+        saveTasks(taskList.getListArr);
 
         if(optSelected !== 7) await pause();
 
