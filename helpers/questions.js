@@ -59,8 +59,7 @@ const createTaskQuestion = [
             return true;
         }
     }
-]
-
+];
 
 
 module.exports = {

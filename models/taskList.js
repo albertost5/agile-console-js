@@ -4,6 +4,11 @@ const Task = require('./task');
 class TaskList {
     #list = {};
 
+
+    /**
+     * Return the task list.
+     * @return  Task[]
+     */
     get getListArr() {
         let message = [];
 			
@@ -44,8 +49,10 @@ class TaskList {
 
         return taskList;
     }
-/**
+
+    /**
      * Return the #list formatted with the un/completed tasks.
+     * @param {boolean}
      * @return  {string}
      */
     getTaskListCompletedOrPending( flag = false) {
@@ -59,6 +66,16 @@ class TaskList {
             taskList += `${ index + 1 }. `.cyan + `${ task } ${ status } \n`
         })
         return taskList;
+    }
+
+    deteleTask(id = '', confirmation = false) {
+
+        if( this.#list[id] && confirmation === 'y'){
+            delete this.#list[id];
+            console.log(`The task with id ${ id } has been removed.}`);
+        }else{
+            console.log('Task not deleted');
+        }
     }
 }
 

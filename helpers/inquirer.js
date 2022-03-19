@@ -24,8 +24,42 @@ const getTaskDescription = async() => {
     return task._description;
 }
 
+const taskListToDeleteWithConfirmation = async( taskListArr = [] ) => {
+    let choices = [];
+    taskListArr.forEach( ( task, index ) => {
+        let i = index + 1;
+        choices.push({
+            value: i,
+            name: `${i}.`.green + ` ${ task }`
+        });        
+    });
+
+    const { id_to_delete } = await inquirer.prompt({
+        type: 'list',
+        name: 'id_to_delete',
+        message: 'Select one task to delete it: ',
+        choices: choices
+    });
+
+    const idTaskToDelete = taskListArr[ id_to_delete - 1 ].id;
+
+    const { answer_delete_id } = await inquirer.prompt({
+        type: 'input',
+        name: 'answer_delete_id',
+        message: `Do you want to remove the task with id ${ idTaskToDelete } ? (y/n)`,
+    });
+
+    const response = {
+        id: idTaskToDelete,
+        answer: answer_delete_id
+    }
+
+    return response;
+}
+
 module.exports = {
     showMenu,
     pause,
-    getTaskDescription
+    getTaskDescription,
+    taskListToDeleteWithConfirmation
 }
