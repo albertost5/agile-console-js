@@ -34,6 +34,11 @@ const taskListToDeleteWithConfirmation = async( taskListArr = [] ) => {
         });        
     });
 
+    choices.unshift({
+        value: 0,
+        name: `${ '0.'.green } Cancel`
+    })
+
     const { id_to_delete } = await inquirer.prompt({
         type: 'list',
         name: 'id_to_delete',
@@ -41,19 +46,27 @@ const taskListToDeleteWithConfirmation = async( taskListArr = [] ) => {
         choices: choices
     });
 
-    const idTaskToDelete = taskListArr[ id_to_delete - 1 ].id;
+    const idTaskToDelete = taskListArr[ id_to_delete - 1 ]?.id;
+    let response;
 
-    const { answer_delete_id } = await inquirer.prompt({
-        type: 'input',
-        name: 'answer_delete_id',
-        message: `Do you want to remove the task with id ${ idTaskToDelete } ? (y/n)`,
-    });
-
-    const answer = /y(?:es)?|1/i.test(answer_delete_id);
-
-    const response = {
-        id: idTaskToDelete,
-        answer
+    if( idTaskToDelete ) {
+        const { answer_delete_id } = await inquirer.prompt({
+            type: 'input',
+            name: 'answer_delete_id',
+            message: `Do you want to remove the task with id ${ idTaskToDelete } ? (y/n)`,
+        });
+    
+        const answer = /y(?:es)?|1/i.test(answer_delete_id);
+    
+        response = {
+            id: idTaskToDelete,
+            answer
+        }
+    }else {
+        response = {
+            id: null,
+            answer: null
+        }
     }
 
     return response;

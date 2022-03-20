@@ -70,12 +70,13 @@ class TaskList {
     }
 
     deteleTask(id = '', confirmation = false) {
-        
-        if( this.#list[id] && confirmation ){
-            delete this.#list[id];
-            console.log(`The task with id ${ id } has been removed.`);
-        }else{
-            console.log('Task not deleted');
+        if( id ) {
+            if( this.#list[id] && confirmation ){
+                delete this.#list[id];
+                console.log(`The task with id ${ id } has been removed.`);
+            }else{
+                console.log('Task not deleted');
+            }
         }
     }
 }
