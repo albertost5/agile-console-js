@@ -1,5 +1,5 @@
 require('colors');
-const { showMenu, pause, getTaskDescription, taskListToDeleteWithConfirmation} = require('./helpers/inquirer');
+const { showMenu, pause, getTaskDescription, taskListToDeleteWithConfirmation, taskListToComplete} = require('./helpers/inquirer');
 const { saveTasks, readTasks } = require('./helpers/save');
 const TaskList = require('./models/taskList');
 
@@ -31,15 +31,17 @@ const main = async() => {
                     break;
                 case 3:
                     // list completed Tasks
-                    console.log( taskList.getTaskListCompletedOrPending(true) );
+                    console.log( taskList.getTaskListCompletedOrPendingFormatted(true) );
                     break;
                 case 4:
                     // list pending Tasks
-                    console.log( taskList.getTaskListCompletedOrPending(false) );
+                    console.log( taskList.getTaskListCompletedOrPendingFormatted(false) );
                     break;
                 case 5:
                     // complete Task(s)
-                
+                    // const taskListUncompleted = taskList.getTaskListCompletedOrPending(false);
+                    const tasksIdsToComplete = await taskListToComplete( taskList.getListArr );
+                    taskList.completeTasks( tasksIdsToComplete );
                     break;
                 case 6:
                     // delete Task

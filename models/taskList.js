@@ -7,7 +7,7 @@ class TaskList {
 
     /**
      * Return the task list.
-     * @return  Task[]
+     * @return  {Task[]}
      */
     get getListArr() {
         let message = [];
@@ -56,8 +56,9 @@ class TaskList {
      * @param {boolean}
      * @return  {string}
      */
-    getTaskListCompletedOrPending( flag = false) {
+    getTaskListCompletedOrPendingFormatted( flag = false) {
         let taskList = '';
+
         let taskListFlag = flag 
                             ? this.getListArr.filter( task => task.doneDate != null )
                             : this.getListArr.filter( task => task.doneDate == null );
@@ -65,7 +66,8 @@ class TaskList {
         taskListFlag.forEach( (task, index) => {
             const status = flag ? `:: ${ task.doneDate }`.green : `:: Pending`.yellow;
             taskList += `${ index + 1 }. `.cyan + `${ task } ${ status } \n`
-        })
+        });
+
         return taskList;
     }
 
@@ -73,10 +75,20 @@ class TaskList {
         if( id ) {
             if( this.#list[id] && confirmation ){
                 delete this.#list[id];
-                console.log(`The task with id ${ id } has been removed.`);
+                console.log(`The task with id ${ id } has been removed.`.red);
             }else{
                 console.log('Task not deleted');
             }
+        }
+    }
+    
+    completeTasks( ids = [] ) {
+        if( ids.length == 0 ) {
+            console.log('There were not changes.'.red);
+        }else {
+            ids.forEach( taskId => {
+                this.#list[taskId].doneDate = new Date().toDateString();
+            });
         }
     }
 }

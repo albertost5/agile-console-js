@@ -17,12 +17,12 @@ const showMenu = async() => {
 
 const pause = async() => {
     await inquirer.prompt( pauseQuestion ); 
-}
+};
 
 const getTaskDescription = async() => {
     const task = await inquirer.prompt( createTaskQuestion );
     return task._description;
-}
+};
 
 const taskListToDeleteWithConfirmation = async( taskListArr = [] ) => {
     let choices = [];
@@ -70,11 +70,48 @@ const taskListToDeleteWithConfirmation = async( taskListArr = [] ) => {
     }
 
     return response;
-}
+};
+
+const taskListToComplete = async( taskListArr = [] ) => {
+    let choices = [];
+
+    taskListArr.forEach( ( task, index ) => {
+        let i = index + 1;
+        const checked = task.doneDate ? true : false;
+
+        choices.push({
+            value: index,
+            name: `${i}.`.green + ` ${ task }`,
+            checked: checked
+        })     
+    });
+    
+    const { options_to_complete } = await inquirer.prompt({
+        type: 'checkbox',
+        name: 'options_to_complete',
+        message: 'Select task(s) to be completed or uncompleted: ',
+        choices: choices
+    });
+
+    let tasksIds = [];
+
+    // console.log(options_to_complete);
+
+    if( options_to_complete ) {
+        options_to_complete.forEach( option => {
+            if( !taskListArr[option].doneDate ){
+                tasksIds.push( taskListArr[option].id )
+            }
+        });
+    }
+    
+    return tasksIds;
+};
 
 module.exports = {
     showMenu,
     pause,
     getTaskDescription,
-    taskListToDeleteWithConfirmation
+    taskListToDeleteWithConfirmation,
+    taskListToComplete
 }
