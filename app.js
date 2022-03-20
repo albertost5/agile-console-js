@@ -22,7 +22,7 @@ const main = async() => {
                 case 1:
                     // create Task
                     const taskDesc = await getTaskDescription();
-                    taskList.createTask(taskDesc);
+                    taskList.createTask('', taskDesc, '');
                     break;
                 case 2:
                     // list Tasks

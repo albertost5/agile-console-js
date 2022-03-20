@@ -49,9 +49,11 @@ const taskListToDeleteWithConfirmation = async( taskListArr = [] ) => {
         message: `Do you want to remove the task with id ${ idTaskToDelete } ? (y/n)`,
     });
 
+    const answer = /y(?:es)?|1/i.test(answer_delete_id);
+
     const response = {
         id: idTaskToDelete,
-        answer: answer_delete_id
+        answer
     }
 
     return response;

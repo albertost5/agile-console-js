@@ -24,8 +24,9 @@ class TaskList {
         this.#list = {};
     }
 
-    createTask( desc = '' ) {
-        const task = new Task( desc );
+    createTask(id = '', desc = '',  date = '') {
+        const task = new Task(id , desc, date);
+        console.log('TASK CREATED => ', task);
         this.#list[task.id] = task;
     }
 
@@ -69,10 +70,10 @@ class TaskList {
     }
 
     deteleTask(id = '', confirmation = false) {
-
-        if( this.#list[id] && confirmation === 'y'){
+        
+        if( this.#list[id] && confirmation ){
             delete this.#list[id];
-            console.log(`The task with id ${ id } has been removed.}`);
+            console.log(`The task with id ${ id } has been removed.`);
         }else{
             console.log('Task not deleted');
         }

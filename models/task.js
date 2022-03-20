@@ -6,9 +6,9 @@ class Task {
     doneDate = null;
 
     constructor( id, desc, date ) {
-        this.id = id ?? uuidv4();
-        this.description = desc ?? this.description;
-        this.doneDate = date ?? this.doneDate;
+        this.id = id ? id : uuidv4();
+        this.description = desc;
+        this.doneDate = date ? date : this.doneDate;
     }
     
     /**
