@@ -10,14 +10,14 @@ class TaskList {
      * @return  {Task[]}
      */
     get getListArr() {
-        let message = [];
+        let listArr = [];
 			
         Object.keys(this.#list).forEach( key => {
             const task = this.#list[key];
-            message.push( task );
+            listArr.push( task );
         });
 
-        return message;
+        return listArr;
     }
 
     constructor() {
@@ -83,13 +83,18 @@ class TaskList {
     }
     
     completeTasks( ids = [] ) {
-        if( ids.length == 0 ) {
-            console.log('There were not changes.'.red);
-        }else {
-            ids.forEach( taskId => {
-                this.#list[taskId].doneDate = new Date().toDateString();
-            });
-        }
+        ids.forEach( id => {
+            const task = this.#list[id]
+            if ( !task.doneDate ) {
+                task.doneDate = new Date().toISOString();
+            } 
+        });
+
+        this.getListArr.forEach( task => {
+            if ( !ids.includes(task.id) ) {
+                this.#list[task.id].doneDate = null;
+            }
+        })
     }
 }
 

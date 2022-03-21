@@ -26,6 +26,7 @@ const getTaskDescription = async() => {
 
 const taskListToDeleteWithConfirmation = async( taskListArr = [] ) => {
     let choices = [];
+    
     taskListArr.forEach( ( task, index ) => {
         let i = index + 1;
         choices.push({
@@ -80,32 +81,20 @@ const taskListToComplete = async( taskListArr = [] ) => {
         const checked = task.doneDate ? true : false;
 
         choices.push({
-            value: index,
+            value: task.id,
             name: `${i}.`.green + ` ${ task }`,
             checked: checked
         })     
     });
     
-    const { options_to_complete } = await inquirer.prompt({
+    const { ids } = await inquirer.prompt({
         type: 'checkbox',
-        name: 'options_to_complete',
+        name: 'ids',
         message: 'Select task(s) to be completed or uncompleted: ',
         choices: choices
     });
 
-    let tasksIds = [];
-
-    // console.log(options_to_complete);
-
-    if( options_to_complete ) {
-        options_to_complete.forEach( option => {
-            if( !taskListArr[option].doneDate ){
-                tasksIds.push( taskListArr[option].id )
-            }
-        });
-    }
-    
-    return tasksIds;
+    return ids;
 };
 
 module.exports = {

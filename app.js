@@ -39,9 +39,8 @@ const main = async() => {
                     break;
                 case 5:
                     // complete Task(s)
-                    // const taskListUncompleted = taskList.getTaskListCompletedOrPending(false);
-                    const tasksIdsToComplete = await taskListToComplete( taskList.getListArr );
-                    taskList.completeTasks( tasksIdsToComplete );
+                    const tasksIds = await taskListToComplete( taskList.getListArr );
+                    taskList.completeTasks( tasksIds );
                     break;
                 case 6:
                     // delete Task
