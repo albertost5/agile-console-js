@@ -1,1 +1,6 @@
+# npm modules
 node_modules/
+# output of the app
+db/
+# config
+.env

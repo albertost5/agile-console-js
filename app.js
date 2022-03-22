@@ -1,17 +1,18 @@
 require('colors');
+require('dotenv').config();
 const fs = require('fs');
+
 const { showMenu, pause, getTaskDescription, taskListToDeleteWithConfirmation, taskListToComplete} = require('./helpers/inquirer');
 const { saveTasks, readTasks } = require('./helpers/save');
 const TaskList = require('./models/taskList');
 
-const dbPath = './db';
 
 const main = async() => {
-    
+
     // Create the directory if it doesn't exist and the file to save the tasks.
-    if( !fs.existsSync( dbPath ) ) {
-        fs.mkdirSync(dbPath)
-        fs.writeFileSync(`${ dbPath }/tasks.json`, '');
+    if( !fs.existsSync( process.env.DB_PATH ) ) {
+        fs.mkdirSync(process.env.DB_PATH)
+        fs.writeFileSync(process.env.DB_FILE_PATH, '');
     }
 
     let optSelected;
