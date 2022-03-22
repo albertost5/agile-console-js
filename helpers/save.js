@@ -1,6 +1,7 @@
 const fs = require('fs')
+require('dotenv').config();
 
-const path = './db/tasks.json';
+const path = process.DB_FILE_PATH;
 
 const saveTasks = ( data ) => {
    
@@ -15,7 +16,7 @@ const saveTasks = ( data ) => {
 }
 
 const readTasks = () => {
-    if ( !fs.existsSync(path) ) {
+    if ( !fs.existsSync( path ) ) {
         console.log('File path doesnt exist.');
         return;
     }
