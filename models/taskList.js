@@ -26,8 +26,8 @@ class TaskList {
 
     createTask(id = '', desc = '',  date = '') {
         const task = new Task(id , desc, date);
-        console.log('TASK CREATED => ', task);
         this.#list[task.id] = task;
+        console.log('Created task with description' + ` ${ task.description }`.cyan);
     }
 
     loadTasks( objectsArr = [] ) {

@@ -1,10 +1,19 @@
 require('colors');
+const fs = require('fs');
 const { showMenu, pause, getTaskDescription, taskListToDeleteWithConfirmation, taskListToComplete} = require('./helpers/inquirer');
 const { saveTasks, readTasks } = require('./helpers/save');
 const TaskList = require('./models/taskList');
 
+const dbPath = './db';
+
 const main = async() => {
     
+    // Create the directory if it doesn't exist and the file to save the tasks.
+    if( !fs.existsSync( dbPath ) ) {
+        fs.mkdirSync(dbPath)
+        fs.writeFileSync(`${ dbPath }/tasks.json`, '');
+    }
+
     let optSelected;
     const taskList = new TaskList();
     const tasksListToImport = readTasks();
@@ -19,31 +28,31 @@ const main = async() => {
             optSelected = await showMenu();
             
             switch (optSelected) {
+                // CREATE TASK
                 case 1:
-                    // create Task
                     const taskDesc = await getTaskDescription();
                     taskList.createTask('', taskDesc, '');
                     break;
+                // LIST TASKS
                 case 2:
-                    // list Tasks
                     console.log( taskList.getTaskListFormatted() );
                     // console.log( new Intl.ListFormat( 'en', { type: 'conjunction' }).format( taskList.getListArr ));
                     break;
+                // LIST COMPLETED TASKS
                 case 3:
-                    // list completed Tasks
                     console.log( taskList.getTaskListCompletedOrPendingFormatted(true) );
                     break;
+                // LIST PENDING TASKS
                 case 4:
-                    // list pending Tasks
                     console.log( taskList.getTaskListCompletedOrPendingFormatted(false) );
                     break;
+                // TOGGLE TASKS
                 case 5:
-                    // complete Task(s)
                     const tasksIds = await taskListToComplete( taskList.getListArr );
                     taskList.completeTasks( tasksIds );
                     break;
+                // DELETE TASK
                 case 6:
-                    // delete Task
                     const response = await taskListToDeleteWithConfirmation(taskList.getListArr);
                     taskList.deteleTask(response.id, response.answer);
                     break;
