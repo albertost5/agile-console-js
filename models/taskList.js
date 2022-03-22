@@ -7,7 +7,7 @@ class TaskList {
 
     /**
      * Return the task list.
-     * @return  {Task[]}
+     * @return { Task[] }
      */
     get getListArr() {
         let listArr = [];
@@ -24,12 +24,20 @@ class TaskList {
         this.#list = {};
     }
 
+    /**
+     * Create a task based on the id, desc and date passed.
+     * @param { string, string, string }
+     */
     createTask(id = '', desc = '',  date = '') {
         const task = new Task(id , desc, date);
         this.#list[task.id] = task;
         console.log('Created task with description' + ` ${ task.description }`.cyan);
     }
 
+    /**
+     * Load tasks read from a .json file (type Object).
+     * @param { Object[] }
+     */
     loadTasks( objectsArr = [] ) {
         objectsArr.forEach(element => {
             const task = new Task(element.id, element.description, element.doneDate)
@@ -39,7 +47,7 @@ class TaskList {
 
     /**
      * Return the #list formatted
-     * @return  {string}
+     * @return { string }
      */
     getTaskListFormatted() {
         let taskList = '';
@@ -53,8 +61,8 @@ class TaskList {
 
     /**
      * Return the #list formatted with the un/completed tasks.
-     * @param {boolean}
-     * @return  {string}
+     * @param { boolean }
+     * @return  { string }
      */
     getTaskListCompletedOrPendingFormatted( flag = false) {
         let taskList = '';
@@ -71,6 +79,10 @@ class TaskList {
         return taskList;
     }
 
+    /**
+     * Delete the task by the id and confirmation passed.
+     * @param { string, boolean }
+     */
     deteleTask(id = '', confirmation = false) {
         if( id ) {
             if( this.#list[id] && confirmation ){
@@ -81,7 +93,11 @@ class TaskList {
             }
         }
     }
-    
+
+    /**
+     * Complete the task of the ids passed and uncompleted the not present.
+     * @param { String[] }
+     */
     completeTasks( ids = [] ) {
         ids.forEach( id => {
             const task = this.#list[id]

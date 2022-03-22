@@ -13,7 +13,7 @@ class Task {
     
     /**
      * Return the task's description.
-     * @return  {string}
+     * @return  { string }
      */
     toString() {
         return this.description;
