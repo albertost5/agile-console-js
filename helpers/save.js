@@ -1,10 +1,9 @@
 const fs = require('fs')
 require('dotenv').config();
 
-const path = process.DB_FILE_PATH;
+const path = process.env.DB_FILE_PATH;
 
 const saveTasks = ( data ) => {
-   
     try {
         fs.writeFileSync( path, JSON.stringify(data) );
         //file written successfully as String
